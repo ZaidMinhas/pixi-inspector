@@ -16,6 +16,7 @@ import rootController from "ui-protocol/src/controllers/rootController";
 import { session } from "./storage";
 import pixiTreeView from "./pixiTreeView";
 import pixiToolbar from "./pixiToolbar";
+import pixiInspectedFields from "./pixiInspectedFields";
 
 const legacy = pixiDevtools() as PixiDevtools;
 legacy.selection = pixiDevtoolsSelection();
@@ -302,8 +303,14 @@ function propertyTabs(): UIProtocolInit[] {
                   scene: () => pixiApplicationTab(appRef),
                   object: () =>
                     defineUI({
-                      component: "PixiObjectProperties",
-                      ...initPanel("object"),
+                      component: "Fragment",
+                      children: [
+                        {
+                          component: "PixiObjectProperties",
+                          ...initPanel("object"),
+                        },
+                        pixiInspectedFields(() => legacy.selection.active()),
+                      ],
                     }),
                   text: () =>
                     defineUI({

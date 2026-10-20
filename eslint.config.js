@@ -14,6 +14,7 @@ export default defineConfig(
       ".svelte-check",
       ".vercel",
       "build",
+      "packages/devtools/dist",
       "node_modules",
       "package",
       "vite.config.ts.timestamp-*.mjs",

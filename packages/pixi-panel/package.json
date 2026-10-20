@@ -4,17 +4,20 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "test": "vitest run",
     "dev": "concurrently --kill-others-on-fail \"npm:dev:*\"",
     "dev:connect": "esbuild --bundle src/ui-connect/ui-connect.ts --watch --outfile=./build/ui-connect.txt",
     "dev:legacy": "esbuild --bundle src/pixi-devtools/ui-legacy.ts --watch --outfile=./build/ui-legacy.txt",
     "prebuild": "esbuild --bundle src/ui-connect/ui-connect.ts --outfile=./build/ui-connect.txt && esbuild --bundle src/pixi-devtools/ui-legacy.ts --outfile=./build/ui-legacy.txt"
   },
   "devDependencies": {
+    "@pixi/devtools": "workspace:*",
     "blender-elements": "workspace:*",
     "concurrently": "^10.0.6",
     "esbuild": "^0.28.2",
     "phaser": "^4.2.1",
     "pixi.js": "^8.22.0",
-    "ui-protocol": "workspace:*"
+    "ui-protocol": "workspace:*",
+    "vitest": "^5.0.5"
   }
 }

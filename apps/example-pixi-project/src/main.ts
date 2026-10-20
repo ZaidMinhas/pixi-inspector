@@ -1,7 +1,8 @@
 /**
  * https://pixijs.com/examples/basic/container
  */
-import { Application, Assets, Container, Sprite } from "pixi.js";
+import { Application, Assets, Sprite } from "pixi.js";
+import { InspectorDemo } from "./InspectorDemo";
 
 (async () => {
   const app = new Application();
@@ -25,7 +26,8 @@ import { Application, Assets, Container, Sprite } from "pixi.js";
     document.body.insertBefore(canvas, devTools);
   }
 
-  const container = new Container();
+  const container = new InspectorDemo();
+  container.label = container.displayName;
 
   app.stage.addChild(container);
 
@@ -49,7 +51,7 @@ import { Application, Assets, Container, Sprite } from "pixi.js";
   // Add ?spin=0 to the url to disable the spinning container
   if (new URLSearchParams(window.location.search).get("spin") !== "0") {
     app.ticker.add((time) => {
-      container.rotation -= 0.01 * time.deltaTime;
+      container.update(time.deltaTime);
     });
   }
 
@@ -60,7 +62,7 @@ import { Application, Assets, Container, Sprite } from "pixi.js";
     (globalThis as any).__PIXI_STAGE__ = app.stage;
     (globalThis as any).__PIXI_RENDERER__ = app.renderer;
   }
-  (globalThis as any).$pixi = container.children[12];
+  (globalThis as any).$pixi = container;
 
   (globalThis as any).destroyBunny = () => {
     container.children[12]?.destroy();
